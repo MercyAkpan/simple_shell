@@ -11,7 +11,8 @@ int main ()
 //	get_parentid();
 //	for_proc();
 //	executev();
-	get_line();
+//	get_line();
+	strtok_word();
 }
 
 
@@ -71,3 +72,18 @@ int get_line()
 	printf("Amount of allocated space is : %d\n", count);
 }
 
+
+
+void strtok_word()
+{
+	char string[] = {"WHO IS IT ??"};
+	char *separate = " \n";
+	char *word;
+
+	word = strtok(string, separate);
+	while(word)
+	{
+		printf("%s\n",word);
+		word = strtok(NULL, separate);
+	}
+}

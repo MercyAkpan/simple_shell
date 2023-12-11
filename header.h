@@ -10,4 +10,5 @@ int executev();
 #include <sys/wait.h>
 int for_proc();
 int get_line();
+void strtok_word();
 #endif
