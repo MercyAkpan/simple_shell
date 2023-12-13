@@ -5,7 +5,9 @@
  */
 void free_commands(char **commands)
 {
-	for (size_t i = 0; commands[i] != NULL; i++)
+	size_t i;
+
+	for (i = 0; commands[i] != NULL; i++)
 	{
 		free(commands[i]);
 		commands[i] = NULL;

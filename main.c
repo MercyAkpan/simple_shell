@@ -7,7 +7,7 @@
  * @argv: list of commands
  * Return: always 0
  */
-int main(int argc, char *argv[])
+int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
 {
 	char *lineptr = NULL;
 	size_t n = 0;
@@ -40,9 +40,11 @@ int main(int argc, char *argv[])
 			else
 			{
 				if (access(commands[0], X_OK) == -1)
+				{
 					get_cmd_path(commands);
 				        execute_command(commands, &status);
 					continue;
+				}
 			}
 		}
 		free_commands(commands);
