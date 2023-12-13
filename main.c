@@ -7,15 +7,13 @@
  * @argv: list of commands
  * Return: always 0
  */
-int main(int argc, __attribute__((unused))char *argv[])
+int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
 {
 	char *lineptr = NULL, **commands;
 	size_t n = 0;
 	ssize_t n_read;
 	int status = 0;
 
-	if (argc > 1 && strcmp(argv[1], "invoke_env") == 0)
-		print_environment(environ);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -42,14 +40,13 @@ int main(int argc, __attribute__((unused))char *argv[])
 			else
 			{
 				if (access(commands[0], X_OK) == -1)
-				{
 					get_cmd_path(commands);
-					execute_command(commands, &status);
-					continue;
-				}
+				execute_command(commands, &status);
+				continue;
 			}
 		}
 		free_commands(commands);
+		free(lineptr);
 	}
 	return (0);
 }
