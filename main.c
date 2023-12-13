@@ -9,11 +9,10 @@
  */
 int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
 {
-	char *lineptr = NULL;
+	char *lineptr = NULL, **commands;
 	size_t n = 0;
 	ssize_t n_read;
 	int status = 0;
-	char **commands;
 
 	while (1)
 	{
@@ -31,7 +30,6 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
 		lineptr[n_read - 1] = '\0';
 		if (*lineptr == '\0')
 			continue;
-
 		commands = tokenize(lineptr, " ");
 		if (commands != NULL)
 		{
@@ -42,7 +40,7 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
 				if (access(commands[0], X_OK) == -1)
 				{
 					get_cmd_path(commands);
-				        execute_command(commands, &status);
+					execute_command(commands, &status);
 					continue;
 				}
 			}
