@@ -15,10 +15,7 @@ int main(int argc, __attribute__((unused))char *argv[])
 	int status = 0;
 
 	if (argc > 1 && strcmp(argv[1], "invoke_env") == 0)
-	{
-        	print_environment(environ);
-//        	return (0);
-	}
+		print_environment(environ);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -40,9 +37,8 @@ int main(int argc, __attribute__((unused))char *argv[])
 		{
 			if (strcmp(commands[0], "exit") == 0)
 				exit_shell(status, commands);
-			else if (strcmp(commands[0],"invoke_env") == 0)
+			else if (strcmp(commands[0], "invoke_env") == 0)
 				print_environment(environ);
-				//execute_env_command(commands);
 			else
 			{
 				if (access(commands[0], X_OK) == -1)

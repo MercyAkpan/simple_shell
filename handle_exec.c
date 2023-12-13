@@ -2,7 +2,6 @@
 /**
  * execute_command - function to execute command variables
  * @commands: commands to be executed
- * @envp: pointer to environment path variables
  * @status: status parameter
  * Return: finastatus
  */
@@ -42,7 +41,7 @@ int execute_command(char **commands, int *status)
 				finalStatus = -1;
 		} while (!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
 	}
-	 return (finalStatus);
+	return (finalStatus);
 }
 /**
  * handle_exec_error - function to hand errors
