@@ -18,7 +18,7 @@ extern int status;
 void print_environment(char **environ);
 void execute_env_command(char **environ);
 void free_commands(char **commands);
-char* _strtok(const char* str, const char* delim);
+/*char* _strtok(const char* str, const char* delim);*/
 char **tokenize(char *str, const char *delim);
 void get_cmd_path(char **pathname);
 void exit_shell(int status, char **commands);

@@ -10,6 +10,7 @@ char **tokenize(char *str, const char *delim)
 	char **commands = NULL, *token, *dup_str;
 	size_t num_of_tokens, i;
 
+	delim = " \t\n";
 	if (str == NULL || *str == '\0')
 		return (NULL);
 

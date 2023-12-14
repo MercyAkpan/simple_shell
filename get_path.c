@@ -15,26 +15,28 @@ void get_cmd_path(char **command)
 		return;
 
 	dup_str = strdup(path_dir);
-	dir = _strtok(dup_str, ":");
+	dir = strtok(dup_str, ":");
 
 	while (dir != NULL)
 	{
-		path = malloc(sizeof(char) * (strlen(*command) + strlen(dir) + 2));
+		path = malloc(sizeof(char) * (strlen(*command) + strlen(dir) + 1));
 		if (path == NULL)
 		{
 			fprintf(stderr, "Memory allocation failed\n");
+			free(dup_str);
 			return;
 		}
 		sprintf(path, "%s/%s", dir, *command);
 		if (access(path, X_OK) == 0)
 		{
-			free(*command);
+			/*free(*command);*/
 			*command = strdup(path);
 			free(path);
 			break;
 		}
 		free(path);
-		dir = _strtok(NULL, ":");
+		dir = strtok(NULL, ":");
 	}
 	free(dup_str);
+	free(*command);
 }

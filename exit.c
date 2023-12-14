@@ -2,6 +2,7 @@
 /**
  * exit_shell - Exits the shell with the specified status
  * @status: the exit status
+ * @commands: This are list of commands.
  */
 void exit_shell(int status, char **commands)
 {
