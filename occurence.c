@@ -7,20 +7,20 @@
  *
  * Return: void
  */
-void print_error(vars_t *vars, char *msg)
+void _prerr(varr__t *sarv, char *wordz)
 {
-	char *count;
+	char *counter;
 
-	_puts2(vars->argv[0]);
-	_puts2(": ");
-	count = _uitoa(vars->count);
-	_puts2(count);
-	free(count);
-	_puts2(": ");
-	_puts2(vars->av[0]);
-	if (msg)
+	_out2(sarv->argv[0]);
+	_out2(": ");
+	counter = _atoitu(sarv->count);
+	_out2(counter);
+	free(counter);
+	_out2(": ");
+	_out2(sarv->av[0]);
+	if (wordz)
 	{
-		_puts2(msg);
+		_out2(wordz);
 	}
 	else
 		perror("");
@@ -32,13 +32,13 @@ void print_error(vars_t *vars, char *msg)
  *
  * Return: void
  */
-void _puts2(char *str)
+void _out2(char *string)
 {
-	ssize_t num, len;
+	ssize_t numb, length;
 
-	num = _strlen(str);
-	len = write(STDERR_FILENO, str, num);
-	if (len != num)
+	numb = _strlength(string);
+	length = write(STDERR_FILENO, string, numb);
+	if (length != numb)
 	{
 		perror("Fatal Error");
 		exit(1);
@@ -52,25 +52,25 @@ void _puts2(char *str)
  *
  * Return: pointer to the converted string
  */
-char *_uitoa(unsigned int count)
+char *_atoitu(unsigned int counter)
 {
-	char *numstr;
-	unsigned int tmp, digits;
+	char *n;
+	unsigned int txmp, j;
 
-	tmp = count;
-	for (digits = 0; tmp != 0; digits++)
-		tmp /= 10;
-	numstr = malloc(sizeof(char) * (digits + 1));
-	if (numstr == NULL)
+	txmp = counter;
+	for (j = 0; txmp != 0; j++)
+		txmp /= 10;
+	n = malloc(sizeof(char) * (j + 1));
+	if (!n)
 	{
 		perror("Fatal Error1");
 		exit(127);
 	}
-	numstr[digits] = '\0';
-	for (--digits; count; --digits)
+	n[j] = '\0';
+	for (--j; counter; --j)
 	{
-		numstr[digits] = (count % 10) + '0';
-		count /= 10;
+		n[j] = (counter % 10) + '0';
+		counter /= 10;
 	}
-	return (numstr);
+	return (n);
 }

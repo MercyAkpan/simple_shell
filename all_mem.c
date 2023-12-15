@@ -7,22 +7,22 @@
  *
  * Return: pointer to the new array
  */
-char **_realloc(char **ptr, size_t *size)
+char **re__all(char **ptrr, size_t *space)
 {
-	char **new;
-	size_t i;
+	char **clea;
+	size_t iter;
 
-	new = malloc(sizeof(char *) * ((*size) + 10));
-	if (new == NULL)
+	clea = malloc(sizeof(char *) * ((*space) + 10));
+	if (clea == NULL)
 	{
-		free(ptr);
+		free(ptrr);
 		return (NULL);
 	}
-	for (i = 0; i < (*size); i++)
+	for (iter = 0; iter < (*space); iter++)
 	{
-		new[i] = ptr[i];
+		clea[iter] = ptrr[iter];
 	}
-	*size += 10;
-	free(ptr);
-	return (new);
+	*space += 10;
+	free(ptrr);
+	return (clea);
 }

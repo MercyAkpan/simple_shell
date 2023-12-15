@@ -6,23 +6,23 @@
  *
  * Return: pointer to the new environment
  */
-char **make_env(char **env)
+char **makenv(char **environ)
 {
-	char **newenv = NULL;
-	size_t i;
+	char **nenv = NULL;
+	size_t iter = 0;
 
-	for (i = 0; env[i] != NULL; i++)
+	for (iter = 0; environ[iter] != NULL; iter++)
 		;
-	newenv = malloc(sizeof(char *) * (i + 1));
-	if (newenv == NULL)
+	nenv = malloc(sizeof(char *) * (iter + 1));
+	if (!nenv)
 	{
 		perror("Fatal Error");
 		exit(1);
 	}
-	for (i = 0; env[i] != NULL; i++)
-		newenv[i] = _strdup(env[i]);
-	newenv[i] = NULL;
-	return (newenv);
+	for (iter = 0; environ[iter] != NULL; iter++)
+		nenv[iter] = dup_str_(environ[iter]);
+	nenv[iter] = NULL;
+	return (nenv);
 }
 
 /**
@@ -31,11 +31,11 @@ char **make_env(char **env)
  *
  * Return: void
  */
-void free_env(char **env)
+void freenv(char **env)
 {
-	unsigned int i;
+	unsigned int iter = 0;
 
-	for (i = 0; env[i] != NULL; i++)
-		free(env[i]);
+	for (iter = 0; env[iter] != NULL; iter++)
+		free(env[iter]);
 	free(env);
 }

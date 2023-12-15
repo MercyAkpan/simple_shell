@@ -6,13 +6,13 @@
  *
  * Return: 1 if match, 0 if not
  */
-unsigned int check_match(char c, const char *str)
+unsigned int check_match(char k, const char *string)
 {
-	unsigned int i;
+	unsigned int iter;
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (iter = 0; string[iter] != '\0'; iter++)
 	{
-		if (c == str[i])
+		if (k == string[iter])
 			return (1);
 	}
 	return (0);
@@ -25,42 +25,42 @@ unsigned int check_match(char c, const char *str)
  *
  * Return: pointer to the next token or NULL
  */
-char *new_strtok(char *str, const char *delim)
+char *new_strtok(char *string, const char *delim)
 {
-	static char *token_start;
-	static char *next_token;
-	unsigned int i;
+	static char *tokenstr;
+	static char *nexttok;
+	unsigned int iter;
 
-	if (str != NULL)
-		next_token = str;
-	token_start = next_token;
-	if (token_start == NULL)
+	if (string)
+		nexttok = string;
+	tokenstr = nexttok;
+	if (!tokenstr)
 		return (NULL);
-	for (i = 0; next_token[i] != '\0'; i++)
+	for (iter = 0; nexttok[iter] != '\0'; iter++)
 	{
-		if (check_match(next_token[i], delim) == 0)
+		if (check_match(nexttok[iter], delim) == 0)
 			break;
 	}
-	if (next_token[i] == '\0' || next_token[i] == '#')
+	if (nexttok[iter] == '\0' || nexttok[iter] == '#')
 	{
-		next_token = NULL;
+		nexttok = NULL;
 		return (NULL);
 	}
-	token_start = next_token + i;
-	next_token = token_start;
-	for (i = 0; next_token[i] != '\0'; i++)
+	tokenstr = nexttok + iter;
+	nexttok = tokenstr;
+	for (iter = 0; nexttok[iter] != '\0'; iter++)
 	{
-		if (check_match(next_token[i], delim) == 1)
+		if (check_match(nexttok[iter], delim) == 1)
 			break;
 	}
-	if (next_token[i] == '\0')
-		next_token = NULL;
+	if (nexttok[iter] == '\0')
+		nexttok = NULL;
 	else
 	{
-		next_token[i] = '\0';
-		next_token = next_token + i + 1;
-		if (*next_token == '\0')
-			next_token = NULL;
+		nexttok[iter] = '\0';
+		nexttok = nexttok + iter + 1;
+		if (*nexttok == '\0')
+			nexttok = NULL;
 	}
-	return (token_start);
+	return (tokenstr);
 }

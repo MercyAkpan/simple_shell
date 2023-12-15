@@ -30,7 +30,7 @@ typedef struct variables
 	char **argv;
 	int status;
 	char **commands;
-} vars_t;
+} varr__t;
 
 /**
  * struct builtins - struct for the builtin functions
@@ -40,41 +40,66 @@ typedef struct variables
 typedef struct builtins
 {
 	char *name;
-	void (*f)(vars_t *);
+	void (*f)(varr__t *);
 } builtins_t;
 
-char **make_env(char **env);
-void free_env(char **env);
-
-ssize_t _puts(char *str);
-char *_strdup(char *strtodup);
-int _strcmpr(char *strcmp1, char *strcmp2);
-char *_strcat(char *strc1, char *strc2);
-unsigned int _strlen(char *str);
-
-char **tokenize(char *buffer, char *delimiter);
-char **_realloc(char **ptr, size_t *size);
+ssize_t _putss(char *string);
+char *dup_str_(char *str2dup);
+int _strcompare_(char *stringcomp, char *strcomp2);
+char *_strcat(char *word1, char *word2);
+unsigned int _strlength(char *word);
+char **re__all(char **ptrr, size_t *space);
 char *new_strtok(char *str, const char *delim);
-
-void (*check_for_builtins(vars_t *vars))(vars_t *vars);
-void new_exit(vars_t *vars);
-void _env(vars_t *vars);
-void new_setenv(vars_t *vars);
-void new_unsetenv(vars_t *vars);
-
-void add_key(vars_t *vars);
-char **find_key(char **env, char *key);
-char *add_value(char *key, char *value);
+void (*check_for_builtins(varr__t *sarv))(varr__t *sarv);
+void neexit(varr__t *sarv);
+void _env(varr__t *sarv);
+void new_setenv(varr__t *sarv);
+void new_unsetenv(varr__t *sarv);
+void _keyy(varr__t *sarv);
+char **key_find(char **environ, char *keyxx);
+char *addval(char *key, char *val);
 int _atoi(char *str);
+void loc_check(varr__t *sarv);
+int _execc_loc(char *com_nd, varr__t *sarv);
+char *find__dir(char **loc);
+int exec_dd(varr__t  *sarv);
+int dir_checking(char *string);
+void _prerr(varr__t *sarv, char *wordz);
+void _out2(char *string);
+char *_atoitu(unsigned int counter);
 
-void check_for_path(vars_t *vars);
-int path_execute(char *command, vars_t *vars);
-char *find_path(char **env);
-int execute_cwd(vars_t *vars);
-int check_for_dir(char *str);
 
-void print_error(vars_t *vars, char *msg);
-void _puts2(char *str);
-char *_uitoa(unsigned int count);
+char **re__all(char **ptrr, size_t *space);
+int _execc_loc(char *com_nd, varr__t *sarv);
+char *find__dir(char **loc);
+void loc_check(varr__t *sarv);
+int exec_dd(varr__t  *vars);
+int dir_checking(char *string);
+ssize_t _putss(char *string);
+char *dup_str_(char *str2dup);
+int _strcompare_(char *stringcomp, char *strcomp2);
+char *_strcat(char *word1, char *word2);
+unsigned int _strlength(char *word);
+void _prerr(varr__t *sarv, char *wordz);
+void _out2(char *string);
+char *_atoitu(unsigned int counter);
+void _keyy(varr__t *sarv);
+char **key_find(char **environ, char *keyxx);
+char *addval(char *key, char *val);
+int _atoi(char *str);
+void (*check_for_builtins(varr__t *sarv))(varr__t *sarv);
+void neexit(varr__t *sarv);
+void _env(varr__t *sarv);
+void new_setenv(varr__t *sarv);
+void new_unsetenv(varr__t *sarv);
+char **makenv(char **environ);
+void freenv(char **env);
+/*static void sig_handler(int uv);*/
+
+int main(int argc __attribute__((unused)), char **argv, char **environment);
+unsigned int check_match(char k, const char *string);
+char *new_strtok(char *string, const char *delim);
+char **__strtok(char *buff, char *delimitter);
+
 
 #endif /* _SHELL_H_ */

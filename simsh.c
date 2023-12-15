@@ -1,21 +1,19 @@
 #include "shell.h"
-
-/* global variable for ^C handling */
 unsigned int sig_flag;
-
+/* global variable for ^C handling */
 /**
  * sig_handler - handles ^C signal interupt
  * @uuv: unused variable (required for signal function prototype)
  *
  * Return: void
  */
-static void sig_handler(int uuv)
+static void sig_handler(int uv)
 {
-	(void) uuv;
+	(void) uv;
 	if (sig_flag == 0)
-		_puts("\n$ ");
+		_putss("\n$ ");
 	else
-		_puts("\n");
+		_putss("\n");
 }
 
 /**
@@ -28,41 +26,41 @@ static void sig_handler(int uuv)
  */
 int main(int argc __attribute__((unused)), char **argv, char **environment)
 {
-	size_t len_buffer = 0;
-	unsigned int is_pipe = 0, i;
-	vars_t vars = {NULL, NULL, NULL, 0, NULL, 0, NULL};
+	size_t bufferlen = 0;
+	unsigned int ispipe = 0, iter;
+	varr__t sarv = {NULL, NULL, NULL, 0, NULL, 0, NULL};
 
-	vars.argv = argv;
-	vars.env = make_env(environment);
+	sarv.argv = argv;
+	sarv.env = makenv(environment);
 	signal(SIGINT, sig_handler);
-	if (!isatty(STDIN_FILENO))
-		is_pipe = 1;
-	if (is_pipe == 0)
-		_puts("$ ");
+	if (!isatty(STDIN_FILENO)) 
+		ispipe = 1;
+	if (ispipe == 0)
+		_putss("$ ");
 	sig_flag = 0;
-	while (getline(&(vars.buffer), &len_buffer, stdin) != -1)
+	while (getline(&(sarv.buffer), &bufferlen, stdin) != -1)
 	{
 		sig_flag = 1;
-		vars.count++;
-		vars.commands = tokenize(vars.buffer, ";");
-		for (i = 0; vars.commands && vars.commands[i] != NULL; i++)
+		sarv.count++;
+		sarv.commands = __strtok(sarv.buffer, ";");
+		for (iter = 0; sarv.commands && sarv.commands[iter] != NULL; iter++)
 		{
-			vars.av = tokenize(vars.commands[i], "\n \t\r");
-			if (vars.av && vars.av[0])
-				if (check_for_builtins(&vars) == NULL)
-					check_for_path(&vars);
-		free(vars.av);
+			sarv.av = __strtok(sarv.commands[iter], "\n \t\r");
+			if (sarv.av && sarv.av[0])
+				if (!check_for_builtins(&sarv))
+					loc_check(&sarv);
+		free(sarv.av);
 		}
-		free(vars.buffer);
-		free(vars.commands);
+		free(sarv.buffer);
+		free(sarv.commands);
 		sig_flag = 0;
-		if (is_pipe == 0)
-			_puts("$ ");
-		vars.buffer = NULL;
+		if (ispipe == 0)
+			_putss("$ ");
+		sarv.buffer = NULL;
 	}
-	if (is_pipe == 0)
-		_puts("\n");
-	free_env(vars.env);
-	free(vars.buffer);
-	exit(vars.status);
+	if (ispipe == 0)
+		_putss("\n");
+	freenv(sarv.env);
+	free(sarv.buffer);
+	exit(sarv.status);
 }

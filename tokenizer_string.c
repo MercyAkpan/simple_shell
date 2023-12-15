@@ -7,32 +7,32 @@
  *
  * Return: pointer to an array of pointers to the tokens
  */
-char **tokenize(char *buffer, char *delimiter)
+char **__strtok(char *buff, char *delimitter)
 {
-	char **tokens = NULL;
-	size_t i = 0, mcount = 10;
+	char **tok = NULL;
+	size_t iter = 0, counter = 10;
 
-	if (buffer == NULL)
+	if (buff == NULL)
 		return (NULL);
-	tokens = malloc(sizeof(char *) * mcount);
-	if (tokens == NULL)
+	tok = malloc(sizeof(char *) * counter);
+	if (tok == NULL)
 	{
 		perror("Fatal Error");
 		return (NULL);
 	}
-	while ((tokens[i] = new_strtok(buffer, delimiter)) != NULL)
+	while ((tok[iter] = new_strtok(buff, delimitter)) != NULL)
 	{
-		i++;
-		if (i == mcount)
+		iter++;
+		if (iter == counter)
 		{
-			tokens = _realloc(tokens, &mcount);
-			if (tokens == NULL)
+			tok = re__all(tok, &counter);
+			if (!tok)
 			{
 				perror("Fatal Error");
 				return (NULL);
 			}
 		}
-		buffer = NULL;
+		buff = NULL;
 	}
-	return (tokens);
+	return (tok);
 }

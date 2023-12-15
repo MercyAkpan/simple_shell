@@ -6,36 +6,36 @@
  *
  * Return: void
  */
-void add_key(vars_t *vars)
+void _keyy(varr__t *sarv)
 {
-	unsigned int i;
-	char **newenv;
+	unsigned int iter;
+	char **nenv;
 
-	for (i = 0; vars->env[i] != NULL; i++)
+	for (iter = 0; sarv->env[iter] != NULL; iter++)
 		;
-	newenv = malloc(sizeof(char *) * (i + 2));
-	if (newenv == NULL)
+	nenv = malloc(sizeof(char *) * (1 + 1 + iter));
+	if (!nenv)
 	{
-		print_error(vars, NULL);
-		vars->status = 127;
-		new_exit(vars);
+		_prerr(sarv, NULL);
+		sarv->status = 127;
+		neexit(sarv);
 	}
-	for (i = 0; vars->env[i] != NULL; i++)
-		newenv[i] = vars->env[i];
-	newenv[i] = add_value(vars->av[1], vars->av[2]);
-	if (newenv[i] == NULL)
+	for (iter = 0; sarv->env[iter] != NULL; iter++)
+		nenv[iter] = sarv->env[iter];
+	nenv[iter] = addval(sarv->av[1], sarv->av[2]);
+	if (!(nenv[iter]))
 	{
-		print_error(vars, NULL);
-		free(vars->buffer);
-		free(vars->commands);
-		free(vars->av);
-		free_env(vars->env);
-		free(newenv);
+		_prerr(sarv, NULL);
+		free(sarv->buffer);
+		free(sarv->commands);
+		free(sarv->av);
+		freenv(sarv->env);
+		free(nenv);
 		exit(127);
 	}
-	newenv[i + 1] = NULL;
-	free(vars->env);
-	vars->env = newenv;
+	nenv[1 + iter] = NULL;
+	free(sarv->env);
+	sarv->env = nenv;
 }
 
 /**
@@ -45,18 +45,18 @@ void add_key(vars_t *vars)
  *
  * Return: pointer to address of the environment variable
  */
-char **find_key(char **env, char *key)
+char **key_find(char **environ, char *keyxx)
 {
-	unsigned int i, j, len;
+	unsigned int iter, iter2, length;
 
-	len = _strlen(key);
-	for (i = 0; env[i] != NULL; i++)
+	length = _strlength(keyxx);
+	for (iter = 0; environ[iter] != NULL; iter++)
 	{
-		for (j = 0; j < len; j++)
-			if (key[j] != env[i][j])
+		for (iter2 = 0; iter2 < length; iter2++)
+			if (keyxx[iter2] != environ[iter][iter2])
 				break;
-		if (j == len && env[i][j] == '=')
-			return (&env[i]);
+		if (iter2 == length && environ[iter][iter2] == '=')
+			return (&environ[iter]);
 	}
 	return (NULL);
 }
@@ -68,23 +68,23 @@ char **find_key(char **env, char *key)
  *
  * Return: pointer to the new string;
  */
-char *add_value(char *key, char *value)
+char *addval(char *key, char *val)
 {
-	unsigned int len1, len2, i, j;
-	char *new;
+	unsigned int len0, len2, iter = 0, k = 0;
+	char *nwr;
 
-	len1 = _strlen(key);
-	len2 = _strlen(value);
-	new = malloc(sizeof(char) * (len1 + len2 + 2));
-	if (new == NULL)
+	len0 = _strlength(key);
+	len2 = _strlength(val);
+	nwr = malloc(sizeof(char) * (len0 + 2 + len2));
+	if (!nwr)
 		return (NULL);
-	for (i = 0; key[i] != '\0'; i++)
-		new[i] = key[i];
-	new[i] = '=';
-	for (j = 0; value[j] != '\0'; j++)
-		new[i + 1 + j] = value[j];
-	new[i + 1 + j] = '\0';
-	return (new);
+	for (iter = 0; key[iter] != '\0'; iter++)
+		nwr[iter] = key[iter];
+	nwr[iter] = '=';
+	for (k = 0; val[k] != '\0'; k++)
+		nwr[iter + k + 1] = val[k];
+	nwr[iter + k + 1] = '\0';
+	return (nwr);
 }
 
 /**
@@ -95,24 +95,24 @@ char *add_value(char *key, char *value)
  */
 int _atoi(char *str)
 {
-	unsigned int i, digits;
-	int num = 0, num_test;
+	unsigned int iter = 0, j = 0;
+	int num = 0, numt;
 
-	num_test = INT_MAX;
-	for (digits = 0; num_test != 0; digits++)
-		num_test /= 10;
-	for (i = 0; str[i] != '\0' && i < digits; i++)
+	numt = INT_MAX;
+	for (j = 0; numt != 0; j++)
+		numt /= 10;
+	for (iter = 0; str[iter] != '\0' && iter < j; iter++)
 	{
-		num *= 10;
-		if (str[i] < '0' || str[i] > '9')
+		num = num * 10;
+		if (str[iter] < '0' || str[iter] > '9')
 			return (-1);
-		if ((i == digits - 1) && (str[i] - '0' > INT_MAX % 10))
+		if ((iter == j - 1) && (str[iter] - '0' > INT_MAX % 10))
 			return (-1);
-		num += str[i] - '0';
-		if ((i == digits - 2) && (str[i + 1] != '\0') && (num > INT_MAX / 10))
+		num += str[iter] - '0';
+		if ((iter == j - 2) && (str[iter + 1] != '\0') && (num > INT_MAX / 10))
 			return (-1);
 	}
-	if (i > digits)
+	if (iter > j)
 		return (-1);
 	return (num);
 }

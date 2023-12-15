@@ -5,25 +5,25 @@
  * @vars: variables
  * Return: pointer to the function or NULL
  */
-void (*check_for_builtins(vars_t *vars))(vars_t *vars)
+void (*check_for_builtins(varr__t *sarv))(varr__t *sarv)
 {
-	unsigned int i;
+	unsigned int iter;
 	builtins_t check[] = {
-		{"exit", new_exit},
+		{"exit", neexit},
 		{"env", _env},
 		{"setenv", new_setenv},
 		{"unsetenv", new_unsetenv},
 		{NULL, NULL}
 	};
 
-	for (i = 0; check[i].f != NULL; i++)
+	for (iter = 0; check[iter].f != NULL; iter++)
 	{
-		if (_strcmpr(vars->av[0], check[i].name) == 0)
+		if (_strcompare_(sarv->av[0], check[iter].name) == 0)
 			break;
 	}
-	if (check[i].f != NULL)
-		check[i].f(vars);
-	return (check[i].f);
+	if (check[iter].f != NULL)
+		check[iter].f(sarv);
+	return (check[iter].f);
 }
 
 /**
@@ -31,30 +31,30 @@ void (*check_for_builtins(vars_t *vars))(vars_t *vars)
  * @vars: variables
  * Return: void
  */
-void new_exit(vars_t *vars)
+void neexit(varr__t *sarv)
 {
 	int status;
 
-	if (_strcmpr(vars->av[0], "exit") == 0 && vars->av[1] != NULL)
+	if (_strcompare_(sarv->av[0], "exit") == 0 && sarv->av[1] != NULL)
 	{
-		status = _atoi(vars->av[1]);
+		status = _atoi(sarv->av[1]);
 		if (status == -1)
 		{
-			vars->status = 2;
-			print_error(vars, ": Illegal number: ");
-			_puts2(vars->av[1]);
-			_puts2("\n");
-			free(vars->commands);
-			vars->commands = NULL;
+			sarv->status = 2;
+			_prerr(sarv, ": Illegal number: ");
+			_out2(sarv->av[1]);
+			_out2("\n");
+			free(sarv->commands);
+			sarv->commands = NULL;
 			return;
 		}
-		vars->status = status;
+		sarv->status = status;
 	}
-	free(vars->buffer);
-	free(vars->av);
-	free(vars->commands);
-	free_env(vars->env);
-	exit(vars->status);
+	free(sarv->buffer);
+	free(sarv->av);
+	free(sarv->commands);
+	freenv(sarv->env);
+	exit(sarv->status);
 }
 
 /**
@@ -62,16 +62,16 @@ void new_exit(vars_t *vars)
  * @vars: struct of variables
  * Return: void.
  */
-void _env(vars_t *vars)
+void _env(varr__t *sarv)
 {
-	unsigned int i;
+	unsigned int iter;
 
-	for (i = 0; vars->env[i]; i++)
+	for (iter = 0; sarv->env[iter]; iter++)
 	{
-		_puts(vars->env[i]);
-		_puts("\n");
+		_putss(sarv->env[iter]);
+		_putss("\n");
 	}
-	vars->status = 0;
+	sarv->status = 0;
 }
 
 /**
@@ -80,36 +80,36 @@ void _env(vars_t *vars)
  *
  * Return: void
  */
-void new_setenv(vars_t *vars)
+void new_setenv(varr__t *sarv)
 {
-	char **key;
-	char *var;
+	char **keyy;
+	char *varr;
 
-	if (vars->av[1] == NULL || vars->av[2] == NULL)
+	if (sarv->av[1] == NULL || sarv->av[2] == NULL)
 	{
-		print_error(vars, ": Incorrect number of arguments\n");
-		vars->status = 2;
+		_prerr(sarv, ": Incorrect number of arguments\n");
+		sarv->status = 2;
 		return;
 	}
-	key = find_key(vars->env, vars->av[1]);
-	if (key == NULL)
-		add_key(vars);
+	keyy = key_find(sarv->env, sarv->av[1]);
+	if (!keyy) 
+		_keyy(sarv);
 	else
 	{
-		var = add_value(vars->av[1], vars->av[2]);
-		if (var == NULL)
+		varr = addval(sarv->av[1], sarv->av[2]);
+		if (varr == NULL)
 		{
-			print_error(vars, NULL);
-			free(vars->buffer);
-			free(vars->commands);
-			free(vars->av);
-			free_env(vars->env);
+			_prerr(sarv, NULL);
+			free(sarv->buffer);
+			free(sarv->commands);
+			free(sarv->av);
+			freenv(sarv->env);
 			exit(127);
 		}
-		free(*key);
-		*key = var;
+		free(*keyy);
+		*keyy = varr;
 	}
-	vars->status = 0;
+	sarv->status = 0;
 }
 
 /**
@@ -118,40 +118,40 @@ void new_setenv(vars_t *vars)
  *
  * Return: void
  */
-void new_unsetenv(vars_t *vars)
+void new_unsetenv(varr__t *sarv)
 {
 	char **key, **newenv;
 
-	unsigned int i, j;
+	unsigned int iter, k;
 
-	if (vars->av[1] == NULL)
+	if (sarv->av[1] == NULL)
 	{
-		print_error(vars, ": Incorrect number of arguments\n");
-		vars->status = 2;
+		_prerr(sarv, ": Incorrect number of arguments\n");
+		sarv->status = 2;
 		return;
 	}
-	key = find_key(vars->env, vars->av[1]);
-	if (key == NULL)
+	key = key_find(sarv->env, sarv->av[1]);
+	if (!key)
 	{
-		print_error(vars, ": No variable to unset");
+		_prerr(sarv, ": No variable to unset");
 		return;
 	}
-	for (i = 0; vars->env[i] != NULL; i++)
+	for (iter = 0; sarv->env[iter] != NULL; iter++)
 		;
-	newenv = malloc(sizeof(char *) * i);
-	if (newenv == NULL)
+	newenv = malloc(sizeof(char *) * iter);
+	if (!newenv)
 	{
-		print_error(vars, NULL);
-		vars->status = 127;
-		new_exit(vars);
+		_prerr(sarv, NULL);
+		sarv->status = 127;
+		neexit(sarv);
 	}
-	for (i = 0; vars->env[i] != *key; i++)
-		newenv[i] = vars->env[i];
-	for (j = i + 1; vars->env[j] != NULL; j++, i++)
-		newenv[i] = vars->env[j];
-	newenv[i] = NULL;
+	for (iter = 0; sarv->env[iter] != *key; iter++)
+		newenv[iter] = sarv->env[iter];
+	for (k = iter + 1; sarv->env[k] != NULL; k++, iter++)
+		newenv[iter] = sarv->env[k];
+	newenv[iter] = NULL;
 	free(*key);
-	free(vars->env);
-	vars->env = newenv;
-	vars->status = 0;
+	free(sarv->env);
+	sarv->env = newenv;
+	sarv->status = 0;
 }
