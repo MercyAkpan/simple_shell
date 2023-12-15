@@ -21,7 +21,8 @@ void free_commands(char **commands);
 /*char* _strtok(const char* str, const char* delim);*/
 char **tokenize(char *str, const char *delim);
 void get_cmd_path(char **pathname);
-void exit_shell(int status, char **commands);
+/*void exit_shell(int status, char **commands);*/
+void exit_shell(int status);
 int main(int argc, char *argv[]);
 int execute_command(char **commands, int *status);
 void handle_exec_error(char **commands, int *status);

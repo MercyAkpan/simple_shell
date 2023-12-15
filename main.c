@@ -7,17 +7,22 @@
  * @argv: list of commands
  * Return: always 0
  */
-int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
+int main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) *argv[])
 {
 	char *lineptr = NULL, **commands;
-	size_t n = 0;
+	size_t n = 1;
 	ssize_t n_read;
-	int status = 0;
+	int status = 127;
 
+	lineptr = malloc(sizeof(char) * n);
+	if (lineptr == NULL)
+	{
+		return (-1);
+	}
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("MercyComfort$ ");
+			printf("$ ");
 		fflush(stdout);
 		n_read = getline(&lineptr, &n, stdin);
 		if (n_read == -1)
@@ -25,28 +30,29 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char *argv[])
 			free(lineptr);
 			if (isatty(STDIN_FILENO))
 				printf("\n");
-			exit_shell(status, commands);
+			exit_shell(status);
 		}
-		lineptr[n_read - 1] = '\0';
+		lineptr[n_read - 1] = '\0';;
 		if (*lineptr == '\0')
 			continue;
 		commands = tokenize(lineptr, " ");
-		if (commands != NULL)
+		if (commands == NULL)
 		{
-			if (strcmp(commands[0], "exit") == 0)
-				exit_shell(status, commands);
-			else if (strcmp(commands[0], "invoke_env") == 0)
+			perror("error");
+			continue;
+		}
+		if (strcmp(commands[0], "exit") == 0)
+				exit_shell(status);
+		else if (strcmp(commands[0], "invoke_env") == 0)
 				print_environment(environ);
-			else
-			{
-				if (access(commands[0], X_OK) == -1)
-					get_cmd_path(commands);
-				execute_command(commands, &status);
-				continue;
-			}
+		else
+		{
+			if (access(commands[0], X_OK) == -1)
+				get_cmd_path(commands);
+			execute_command(commands, &status);
 		}
 		free_commands(commands);
-		free(lineptr);
 	}
+	free(lineptr);
 	return (0);
 }
