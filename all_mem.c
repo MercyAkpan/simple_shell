@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * re_allc - reallocates a pointer to double the space
+ * re__all - reallocates a pointer to double the space
  * @ptrr: pointer to array
  * @space: pointer to number of elements in the old array
  * Return: pointer to the new array

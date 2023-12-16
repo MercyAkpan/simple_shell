@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _kkey - make environment variable
+ * _keyy - make environment variable
  * @sarv: pointer to struct of variables
  * Return: void
  */

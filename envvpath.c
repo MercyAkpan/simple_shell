@@ -2,7 +2,7 @@
 /**
  * _execc_loc - executes a command in given path
  * @com_nd: full path to the commands
- * @sars: pointer to variables
+ * @sarv: pointer to variables
  * Return: 0 on succcess, 1 on failure
  */
 int _execc_loc(char *com_nd, varr__t *sarv)
@@ -40,7 +40,7 @@ int _execc_loc(char *com_nd, varr__t *sarv)
 }
 
 /**
- * find_dir - finds the PATH variable
+ * find__dir - finds the PATH variable
  * @loc: array of environment variables
  * Return: pointer to the node that contains the PATH, or NULL
  */
@@ -60,8 +60,8 @@ char *find__dir(char **loc)
 	return (loc[iter]);
 }
 /**
- * lock_path - checks if the command is in the PATH
- * @sars: variables
+ * loc_check - checks if the command is in the PATH
+ * @sarv: variables
  *
  * Return: void
  */
@@ -110,8 +110,7 @@ void loc_check(varr__t *sarv)
 
 /**
  * exec_dd - executes the command in the current working directory
- * @sars: pointer to struct of variables
- *
+ * @sarv: pointer to struct of variables
  * Return: 0 on success, 1 on failure
  */
 int exec_dd(varr__t  *sarv)
@@ -157,7 +156,7 @@ int exec_dd(varr__t  *sarv)
 
 /**
  * dir_checking - checks if the command is a part of a path
- * @str: command
+ * @string: command
  *
  * Return: 1 on success, 0 on failure
  */

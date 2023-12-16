@@ -20,7 +20,7 @@ ssize_t _putss(char *string)
 }
 
 /**
- * dup_str - returns pointer to new mem
+ * dup_str_- returns pointer to new mem
  * alloc space with duplicate
  * @str2dup: string to be duplicated
  * Return: a pointer to the new string duplicate
@@ -45,8 +45,8 @@ char *dup_str_(char *str2dup)
 }
 
 /**
- * _strocmpare_ - compares two strings
- * @stingrcomp: first string, of two, to be compared in length
+ * _strcompare_ - compares two strings
+ * @stringcomp: first string, of two, to be compared in length
  * @strcomp2: second string, of two, to be compared
  * Return: 0 on success, anything else is a failure
  */

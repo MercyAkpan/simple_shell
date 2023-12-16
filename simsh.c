@@ -1,6 +1,5 @@
 #include "shell.h"
-unsigned int sig_flag;
-/* global variable for ^C handling
+/**
  * sig_handler - handles ^C signal interupt
  * @uv: unused variable
  * Return: void
@@ -13,7 +12,7 @@ static void sig_handler(int uv)
 	else
 		_putss("\n");
 }
-
+/*unsigned int sig_flag;*/
 /**
  * main - main function
  * @argc: number of arguments passed

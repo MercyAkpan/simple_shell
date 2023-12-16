@@ -1,7 +1,8 @@
 #include "shell.h"
 
 /**
- * _prerror - prints error messages to stnderr
+ * _prerr - prints error messages to stnderr
+ * @sarv: Thisis the struct
  * @wordz: pointer to struct of variables
  * Return: void
  */

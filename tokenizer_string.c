@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _strtok - tokenizes a buffer with a delimiter
+ * __strtok - tokenizes a buffer with a delimiter
  * @buff: buffer to tokenize
  * @delimitter: delimiter to tokenize
  * Return: pointer to an array of tokens

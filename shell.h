@@ -10,7 +10,6 @@
 #include <sys/wait.h>
 #include <limits.h>
 #include <signal.h>
-
 unsigned int sig_flag;
 
 /**
