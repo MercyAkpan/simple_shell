@@ -1,10 +1,8 @@
 #include "shell.h"
 unsigned int sig_flag;
-/* global variable for ^C handling */
-/**
+/* global variable for ^C handling
  * sig_handler - handles ^C signal interupt
- * @uuv: unused variable (required for signal function prototype)
- *
+ * @uv: unused variable
  * Return: void
  */
 static void sig_handler(int uv)
@@ -17,9 +15,9 @@ static void sig_handler(int uv)
 }
 
 /**
- * main - main function for the shell
- * @argc: number of arguments passed to main
- * @argv: array of arguments passed to main
+ * main - main function
+ * @argc: number of arguments passed
+ * @argv: array of arguments passed
  * @environment: array of environment variables
  *
  * Return: 0 or exit status, or ?
@@ -33,7 +31,7 @@ int main(int argc __attribute__((unused)), char **argv, char **environment)
 	sarv.argv = argv;
 	sarv.env = makenv(environment);
 	signal(SIGINT, sig_handler);
-	if (!isatty(STDIN_FILENO)) 
+	if (!isatty(STDIN_FILENO))
 		ispipe = 1;
 	if (ispipe == 0)
 		_putss("$ ");

@@ -1,10 +1,8 @@
 #include "shell.h"
 
 /**
- * print_error - prints error messages to standard error
- * @vars: pointer to struct of variables
- * @msg: message to print
- *
+ * _prerror - prints error messages to stnderr
+ * @wordz: pointer to struct of variables
  * Return: void
  */
 void _prerr(varr__t *sarv, char *wordz)
@@ -27,8 +25,8 @@ void _prerr(varr__t *sarv, char *wordz)
 }
 
 /**
- * _puts2 - prints a string to standard error
- * @str: string to print
+ * _out2 - prints a string to standard error
+ * @string: string to be print
  *
  * Return: void
  */
@@ -47,9 +45,8 @@ void _out2(char *string)
 }
 
 /**
- * _uitoa - converts an unsigned int to a string
- * @count: unsigned int to convert
- *
+ * _atoitu - converts an unsigned int to a string
+ * @counter: unsigned int to be convert
  * Return: pointer to the converted string
  */
 char *_atoitu(unsigned int counter)

@@ -1,10 +1,9 @@
 #include "shell.h"
 
 /**
- * _puts - writes a string to standard output
- * @str: string to write
- *
- * Return: number of chars printed or -1 on failure
+ * _putss - writes a string of characters to standard output
+ * @string: string to write
+ * Return: number of chars printed or -1
  */
 ssize_t _putss(char *string)
 {
@@ -21,9 +20,10 @@ ssize_t _putss(char *string)
 }
 
 /**
- * _strdup - returns pointer to new mem alloc space which contains copy
- * @strtodup: string to be duplicated
- * Return: a pointer to the new duplicated string
+ * dup_str - returns pointer to new mem
+ * alloc space with duplicate
+ * @str2dup: string to be duplicated
+ * Return: a pointer to the new string duplicate
  */
 char *dup_str_(char *str2dup)
 {
@@ -45,9 +45,9 @@ char *dup_str_(char *str2dup)
 }
 
 /**
- * _strcmpr - compares two strings
- * @strcmp1: first string, of two, to be compared in length
- * @strcmp2: second string, of two, to be compared
+ * _strocmpare_ - compares two strings
+ * @stingrcomp: first string, of two, to be compared in length
+ * @strcomp2: second string, of two, to be compared
  * Return: 0 on success, anything else is a failure
  */
 int _strcompare_(char *stringcomp, char *strcomp2)
@@ -66,8 +66,8 @@ int _strcompare_(char *stringcomp, char *strcomp2)
 
 /**
  * _strcat - concatenates two strings
- * @strc1: first string
- * @strc2: second string
+ * @word1: first string
+ * @word2: second string
  * Return: pointer
  */
 char *_strcat(char *word1, char *word2)
@@ -104,8 +104,8 @@ char *_strcat(char *word1, char *word2)
 	return (word3);
 }
 /**
- * _strlen - returns the length of a string
- * @str: string to be measured
+ * _strlength - returns the length of a string
+ * @word: string to be measured
  * Return: length of string
  */
 unsigned int _strlength(char *word)

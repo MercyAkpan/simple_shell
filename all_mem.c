@@ -1,10 +1,9 @@
 #include "shell.h"
 
 /**
- * _realloc - reallocates a pointer to double the space
- * @ptr: pointer to the old array
- * @size: pointer to number of elements in the old array
- *
+ * re_allc - reallocates a pointer to double the space
+ * @ptrr: pointer to array
+ * @space: pointer to number of elements in the old array
  * Return: pointer to the new array
  */
 char **re__all(char **ptrr, size_t *space)

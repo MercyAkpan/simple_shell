@@ -11,6 +11,8 @@
 #include <limits.h>
 #include <signal.h>
 
+unsigned int sig_flag;
+
 /**
  * struct variables - variables
  * @av: command line arguments

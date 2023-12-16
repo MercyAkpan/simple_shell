@@ -2,7 +2,7 @@
 
 /**
  * check_for_builtins - checks if the command is a builtin
- * @vars: variables
+ * @sarv: variables
  * Return: pointer to the function or NULL
  */
 void (*check_for_builtins(varr__t *sarv))(varr__t *sarv)
@@ -27,8 +27,8 @@ void (*check_for_builtins(varr__t *sarv))(varr__t *sarv)
 }
 
 /**
- * new_exit - exit program
- * @vars: variables
+ * neexit - function exit program
+ * @sarv: variables
  * Return: void
  */
 void neexit(varr__t *sarv)
@@ -59,7 +59,7 @@ void neexit(varr__t *sarv)
 
 /**
  * _env - prints the current environment
- * @vars: struct of variables
+ * @sarv: struct of variables
  * Return: void.
  */
 void _env(varr__t *sarv)
@@ -76,8 +76,7 @@ void _env(varr__t *sarv)
 
 /**
  * new_setenv - create a new environment variable, or edit an existing variable
- * @vars: pointer to struct of variables
- *
+ * @sarv: pointer to structure of variables
  * Return: void
  */
 void new_setenv(varr__t *sarv)
@@ -92,7 +91,7 @@ void new_setenv(varr__t *sarv)
 		return;
 	}
 	keyy = key_find(sarv->env, sarv->av[1]);
-	if (!keyy) 
+	if (!keyy)
 		_keyy(sarv);
 	else
 	{
@@ -114,8 +113,7 @@ void new_setenv(varr__t *sarv)
 
 /**
  * new_unsetenv - remove an environment variable
- * @vars: pointer to a struct of variables
- *
+ * @sarv: pointer to a struct of variables
  * Return: void
  */
 void new_unsetenv(varr__t *sarv)

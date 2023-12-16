@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * make_env - make the shell environment from the environment passed to main
- * @env: environment passed to main
+ * makenv - shell environment from the environment passed to main
+ * @environ: environment passed to main
  *
  * Return: pointer to the new environment
  */
@@ -26,7 +26,7 @@ char **makenv(char **environ)
 }
 
 /**
- * free_env - free the shell's environment
+ * freenv - free the shell's environment
  * @env: shell's environment
  *
  * Return: void
